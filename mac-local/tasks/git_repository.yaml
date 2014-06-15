@@ -1,0 +1,9 @@
+---
+- name: Ensure presense of github.com my repositories
+  git: repo=ssh://git@github.com/key-amb/{{ item.repo }}.git
+       dest={{ git_dir }}/{{ item.dest }}
+       force=no
+  with_items:
+    - { repo: 'dotfiles',        dest: 'dotfiles' }
+    - { repo: 'LimeChat-Themes', dest: 'LimeChat-Themes' }
+

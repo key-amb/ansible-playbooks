@@ -1,0 +1,5 @@
+#!/bin/bash
+
+RUN_DIR=$(dirname $0)
+
+exec ansible-playbook -i ${RUN_DIR}/hosts ${RUN_DIR}/playbook.yaml $@

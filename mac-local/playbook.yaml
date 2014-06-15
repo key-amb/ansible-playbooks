@@ -1,0 +1,10 @@
+- hosts: 127.0.0.1
+  vars:
+    git_dir: "{{ ansible_env.HOME }}/gitrepos"
+    google_ime_dic: "{{ ansible_env.HOME }}/Library/Application\\ Support/Google/JapaneseInput"
+  tasks:
+    - include: tasks/user_directory.yaml
+    - include: tasks/brew_package.yaml
+    - include: tasks/git_repository.yaml
+    - include: tasks/application_setting.yaml
+

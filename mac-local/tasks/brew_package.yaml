@@ -1,0 +1,21 @@
+---
+- name: Ensure presense of some homebrew packages
+  homebrew: name={{ item.name }} state=present
+  with_items:
+    - { name: 'pkg-config' }
+    - { name: 'autoconf' }
+    - { name: 'tree' }
+    - { name: 'plenv' }
+    - { name: 'perl-build' }
+    - { name: 'pyenv' }
+    - { name: 'pyenv-virtualenv' }
+
+- name: Check the existence of git
+  command: which git
+  register: git_executable
+  ignore_errors: yes
+
+- name: "Install git by homebrew when there's no git"
+  homebrew: name=git state=present
+  when: git_executable is defined and git_executable.rc > 0
+

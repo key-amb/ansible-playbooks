@@ -1,0 +1,19 @@
+---
+- name: Ensure LimeChat Themes installed
+  shell: >
+    rake themes:init &&
+    rake themes:install
+    chdir={{ git_dir }}/LimeChat-Themes
+    creates={{ ansible_env.HOME }}/Library/Application\ Support/LimeChat/Themes/Rakefile
+
+- name: Check if Google IME dictionary is linked
+  shell: test -L {{ google_ime_dic }}
+  register: google_ime_dic_linked
+  ignore_errors: yes
+
+- name: Use Dropbox for Google IME dictionary
+  shell: >
+    test -e {{ google_ime_dic }} && rm -rf {{ google_ime_dic }} ;
+    ln -s {{ ansible_env.HOME }}/Dropbox/Private/Google/JapaneseInput {{ ansible_env.HOME }}/Library/Application\ Support/Google/JapaneseInput
+  when: google_ime_dic_linked is defined and google_ime_dic_linked.rc != 0
+

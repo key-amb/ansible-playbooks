@@ -1,0 +1,6 @@
+---
+- name: Ensure vim dotfiles linked
+  command: script/setup-vim-env.sh
+    chdir={{ git_dir }}/dotfiles
+    creates={{ ansible_env.HOME }}/dotfiles
+
