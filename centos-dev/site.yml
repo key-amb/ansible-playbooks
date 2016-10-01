@@ -3,7 +3,7 @@
   become: yes
   become_method: sudo
   tasks:
-    - include: tasks/common.yml
+    - include: tasks/local.yml
 - hosts: all
   become: yes
   become_method: sudo

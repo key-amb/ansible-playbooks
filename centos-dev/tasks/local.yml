@@ -1,0 +1,5 @@
+---
+- name: Create app user
+  user: name=app uid=2000 home=/home/app shell=/bin/bash generate_ssh_key=yes
+        ssh_key_file=.ssh/id_rsa
+
