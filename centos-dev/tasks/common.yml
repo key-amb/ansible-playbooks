@@ -1,0 +1,4 @@
+---
+- name: Create app user
+  user: name=app uid=2000 home=/home/app shell=/bin/bash
+
