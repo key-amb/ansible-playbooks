@@ -3,3 +3,12 @@
   user: name=app uid=2000 home=/home/app shell=/bin/bash generate_ssh_key=yes
         ssh_key_file=.ssh/id_rsa
 
+- name: Create authorized_keys
+  become: yes
+  become_user: app
+  shell: >
+    cat .ssh/id_rsa.pub > .ssh/authorized_keys
+    chmod 0600 .ssh/authorized_keys
+    chdir=/home/app
+    creates=/home/app/.ssh/authorized_keys
+

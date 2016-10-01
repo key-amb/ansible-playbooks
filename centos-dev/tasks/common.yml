@@ -2,3 +2,6 @@
 - name: Create app user
   user: name=app uid=2000 home=/home/app shell=/bin/bash
 
+- name: Sync /home/app/.ssh
+  file: path=/home/app/.ssh state=directory owner=app group=app mode=0700
+
