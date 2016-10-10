@@ -2,6 +2,13 @@
 - name: Create app user
   user: name=app uid=2000 home=/home/app shell=/bin/bash
 
-- name: Sync /home/app/.ssh
+- name: Create /home/app/.ssh
   file: path=/home/app/.ssh state=directory owner=app group=app mode=0700
+
+- name: Sync /home/app/.ssh
+  become_user: app
+  shell: >
+    rsync -avzc -e \
+      "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
+      {{ hostname }}:/home/app/.ssh/ /home/app/.ssh/
 
